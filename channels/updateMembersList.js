@@ -20,7 +20,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.cadet).then(
                             cadet => {
-                                cadet.setName(`Cᴀᴅᴇᴛs${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗖𝗮𝗱𝗲𝘁𝘀${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -30,7 +30,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.recruit).then(
                             cadet => {
-                                cadet.setName(`Rᴇᴄʀᴜɪᴛs${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗥𝗲𝗰𝗿𝘂𝗶𝘁𝘀${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -40,7 +40,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.echowest).then(
                             cadet => {
-                                cadet.setName(`EᴄʜᴏWᴇsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗘𝗰𝗵𝗼𝗪𝗲𝘀𝘁${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -50,7 +50,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.echoeast).then(
                             cadet => {
-                                cadet.setName(`EᴄʜᴏEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗘𝗰𝗵𝗼𝗘𝗮𝘀𝘁${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -60,7 +60,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.foxtrotwest).then(
                             cadet => {
-                                cadet.setName(`FᴏxᴛʀᴏᴛWᴇsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗙𝗼𝘅𝘁𝗿𝗼𝘁𝗪𝗲𝘀𝘁${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -70,7 +70,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.foxtroteast).then(
                             cadet => {
-                                cadet.setName(`FᴏxᴛʀᴏᴛEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗙𝗼𝘅𝘁𝗿𝗼𝘁𝗘𝗮𝘀𝘁${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -80,7 +80,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.golfeast).then(
                             cadet => {
-                                cadet.setName(`FᴏxᴛʀᴏᴛEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗚𝗼𝗹𝗳𝗘𝗮𝘀𝘁${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -90,7 +90,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.golfwest).then(
                             cadet => {
-                                cadet.setName(`FᴏxᴛʀᴏᴛEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝗚𝗼𝗹𝗳𝗪𝗲𝘀𝘁${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
@@ -100,7 +100,7 @@ function UpdateChannel()
                     role => {
                         guild.channels.fetch(channels.reaper).then(
                             cadet => {
-                                cadet.setName(`𝗥𝗲𝗮𝗽𝗲𝗿𝘀${chars.colon}${chars.space}${role.members.size}`)
+                                cadet.setName(`𝐑𝐞𝐚𝐩𝐞𝐫𝐬${chars.colon}${chars.space}${role.members.size}`)
                             }
                         )
                     }
