@@ -10,7 +10,7 @@ module.exports = {
 	once: true,
 	execute() {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
-		const channelsPath = path.join("A:/Development/rpr/", 'channels');
+		const channelsPath = path.join(__dirname, '..', 'channels');
 		const channelsFiles = fs.readdirSync(channelsPath).filter(file => file.endsWith('.js'));
 		for (const file of channelsFiles) {
 			const filePath = path.join(channelsPath, file);
