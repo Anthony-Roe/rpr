@@ -75,6 +75,26 @@ function UpdateChannel()
                         )
                     }
                 )
+                // golfeast
+                guild.roles.fetch(roles.foxtroteast).then(
+                    role => {
+                        guild.channels.fetch(channels.foxtroteast).then(
+                            cadet => {
+                                cadet.setName(`FᴏxᴛʀᴏᴛEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                            }
+                        )
+                    }
+                )
+                // golfwest
+                guild.roles.fetch(roles.foxtroteast).then(
+                    role => {
+                        guild.channels.fetch(channels.foxtroteast).then(
+                            cadet => {
+                                cadet.setName(`FᴏxᴛʀᴏᴛEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
+                            }
+                        )
+                    }
+                )
                 // reaper
                 guild.roles.fetch(roles.reaper).then(
                     role => {
