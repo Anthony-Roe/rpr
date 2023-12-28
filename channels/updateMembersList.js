@@ -76,9 +76,9 @@ function UpdateChannel()
                     }
                 )
                 // golfeast
-                guild.roles.fetch(roles.foxtroteast).then(
+                guild.roles.fetch(roles.golfeast).then(
                     role => {
-                        guild.channels.fetch(channels.foxtroteast).then(
+                        guild.channels.fetch(channels.golfeast).then(
                             cadet => {
                                 cadet.setName(`FᴏxᴛʀᴏᴛEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
                             }
@@ -86,9 +86,9 @@ function UpdateChannel()
                     }
                 )
                 // golfwest
-                guild.roles.fetch(roles.foxtroteast).then(
+                guild.roles.fetch(roles.golfwest).then(
                     role => {
-                        guild.channels.fetch(channels.foxtroteast).then(
+                        guild.channels.fetch(channels.golfwest).then(
                             cadet => {
                                 cadet.setName(`FᴏxᴛʀᴏᴛEᴀsᴛ${chars.colon}${chars.space}${role.members.size}`)
                             }
