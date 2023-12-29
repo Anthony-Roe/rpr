@@ -12,7 +12,6 @@ module.exports = {
 	once: true,
 	execute() {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
-
 		const channelsPath = path.join(client.projectDir, 'channels');
 		const channelsFiles = fs.readdirSync(channelsPath).filter(file => file.endsWith('.js'));
 		for (const file of channelsFiles) {
