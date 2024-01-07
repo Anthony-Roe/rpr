@@ -4,7 +4,7 @@ const fs = require('node:fs');
 require('dotenv').config();
 const path = require('node:path');
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers] });
 module.exports = client;
 client.projectDir = __dirname;
 client.commands = new Collection();
@@ -36,14 +36,18 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'
 
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
+	try {
+	  const event = require(filePath);
+	  if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
-	} else {
+	  } else {
 		client.on(event.name, (...args) => event.execute(...args));
+	  }
+	  console.log(`${event.name} loaded.`);
+	} catch (error) {
+	  console.error(`Error loading event ${file}:`, error);
 	}
-    console.log(`${event.name} loaded.`)
-}
+  }
 
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(process.env.TOKEN_KEY);
