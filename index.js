@@ -3,7 +3,6 @@ const { Client, REST, Routes, Collection, Events, GatewayIntentBits } = require(
 const fs = require('node:fs');
 require('dotenv').config();
 const path = require('node:path');
-const { guildId } = require('./config.json');
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences] });
 module.exports = client;
@@ -12,6 +11,8 @@ client.commands = new Collection();
 const commands = [];
 const foldersPath = path.join(client.projectDir, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
+
+const guildId = process.env.GUILD_ID;
 
 for (const folder of commandFolders) {
 	// Grab all the command files from the commands directory you created earlier
