@@ -36,14 +36,28 @@ function removeOldRank(displayName){
 
 }
 
+function isInReserve(roles){
+  const roleNames = roles.map(role => role.name);
+  if (roleNames.includes("Active Reservist")){
+    return true;
+  }
+  return false;
+}
+
 function getHighestRole(roles) {
 
   //TODO: fill more roles
-  //TODO: it's in reverse order - change this
-  const roleStructure = ["Cadet", "Recruit", "Trainee Operator"];
+  const roleStructure = ["Trainee Operator", "Recruit", "Cadet" ]; 
 
   const roleNames = roles.map(role => role.name);
-  const highestRole = roleStructure.find(role => roleNames.includes(role));
+  let highestRole = roleStructure.find(role => roleNames.includes(role));
+
+  if (highestRole === "Trainee Operator"){
+    highestRole = "[T] Operator"; //we have to change "Trainee Operator" to "[T] Operator" otherwise we need to do this shit
+  }
+  if(isInReserve(roles)){
+    highestRole = "[R]" + highestRole; //i know that we use [R-T] to indicate trainee in reserve, but i can't figure it out rn
+  }
 
   return highestRole || null; 
 }
