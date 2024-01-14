@@ -1,5 +1,5 @@
 const { Events } = require('discord.js');
-const guildId = process.env.GUILD_ID;
+const { guildId } = require('../config.json');
 
 module.exports = {
   name: Events.GuildMemberUpdate,
