@@ -1,77 +1,60 @@
 const { Events } = require('discord.js');
-const fs = require('node:fs');
 const guildId = process.env.GUILD_ID;
-const client = require('../index.js');
-const path = require('node:path');
 
-//for now this function triggers when we update member, and the nickname will change for this member only
-//TODO: execute onReady()
 module.exports = {
   name: Events.GuildMemberUpdate,
   async execute(oldMember, newMember) {
-    //guard clause to check for proper guildId. Is redundant i think
     if (newMember.guild.id !== guildId) return;
 
-    //check if role cache has changed
-    const rolesChanged = oldMember.roles.cache.size !== newMember.roles.cache.size;
+    const rolesChanged = !oldMember.roles.cache.equals(newMember.roles.cache);
 
     if (rolesChanged) {
-      const highestRole = removeOldRank(getHighestRole(newMember.roles.cache));
-      const normalizedNickname = removeOldRank(newMember.displayName);
-      const newNickname = `${highestRole} | ${normalizedNickname}`;
-      const truncatedNickname = truncateNickname(newNickname);
-
-      if (truncateNickname(newNickname) !== truncatedNickname) console.log(`${newNickname} was too long. ${newMember.user.tag} nickname set to: ${truncateNickname}`);
-
-      newMember.setNickname(truncatedNickname)
-        .then(() => console.log(`Nickname updated for ${newMember.user.tag}: ${newNickname}`))
-        .catch(console.error);
-    }
+      const { displayName } = newMember;
+      const roleNames = new Set(newMember.roles.cache.map(role => role.name));
+      const highestRole = getHighestRole(roleNames);
+    
+      const newNickname = truncateNickname(`${highestRole} | ${removeOldRank(displayName)}`);
+      
+    
+      try {
+        await newMember.setNickname(newNickname);
+        console.log(`Nickname updated for ${newMember.user.tag}: ${newNickname}`);
+      } catch (error) {
+        console.error('Error updating nickname:', error);
+      }
+    }    
   },
 };
 
-function truncateNickname(displayName){
+function truncateNickname(displayName) {
   // 32 = maximum length
-  if (displayName. length > 32) 
-    return displayName.substring(0, 32).trim();
-  return displayName;
+  return displayName.length > 32 ? displayName.substring(0, 32).trim() : displayName;
 }
 
-function removeOldRank(displayName){
+function removeOldRank(displayName) {
   const index = displayName.indexOf('|');
+  return index !== -1 ? displayName.substring(index + 1).trim() : displayName;
+}
+
+function isInReserve(roles) {
+  return roles.has("Active Reservist");
+}
+
+function getHighestRole(roleNames) {
+  const roleStructure = ["Operator", "Trainee Operator", "Recruit", "Cadet"];
   
-  if (index !== -1) {
-    // If | is found, remove everything before it (including |)
-    return displayName.substring(index + 1).trim();
-  } 
-    return displayName;
+  const isTraineeOperator = roleNames.has("Trainee Operator");
+  const isReservist = roleNames.has("Active Reservist");
 
-}
-
-function isInReserve(roles){
-  const roleNames = roles.map(role => role.name);
-  if (roleNames.includes("Active Reservist")){
-    return true;
-  }
-  return false;
-}
-
-function getHighestRole(roles) {
-
-  //TODO: fill more roles
-  //IMPORTANT: New roles have to be added at the beginning of the array
-  const roleStructure = ["Trainee Operator", "Recruit", "Cadet" ]; 
-
-  const roleNames = roles.map(role => role.name);
-  let highestRole = roleStructure.find(role => roleNames.includes(role));
-
-  if (highestRole === "Trainee Operator"){
-    highestRole = "[T] Operator"; //we have to change "Trainee Operator" to "[T] Operator" otherwise we need to do this shit
-  }
-  if(isInReserve(roles)){
-    //[R][T] Operator looks cleaner for me
-    highestRole = "[R]" + highestRole; //i know that we use [R-T] to indicate trainee in reserve, but i can't figure it out rn
+  if (isTraineeOperator && isReservist) {
+    return "[R-T] Operator";
   }
 
-  return highestRole || null; 
+  for (const role of roleStructure) {
+    if (roleNames.has(role)) {
+      // If the role is trainee operator return [T] operator, otherwise if reservist return [R] + role, otherwise return role.
+      return role === "Trainee Operator" ? "[T] Operator" : isReservist ? "[R] " + role : role;
+    }
+  }
+  return null;
 }
